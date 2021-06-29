@@ -792,7 +792,7 @@ Microsoft SQ2
         $ValidPolicy = (Get-SecureBootPolicy -ErrorAction Stop).Publisher -eq "77fa9abd-0359-4d32-bd60-28f4e78f784b"
         if ($Enabled -and $ValidPolicy) { $Ready.SecureBootReady = $true } else { $Ready.SecureBootReady = $false }
     }
-    Catch { $Ready.SecureBootEnabled = $false }
+    Catch { $Ready.SecureBootReady = $false }
     # UEFI
         # Check by looking if the system drive is formatted for GPT
         Try { $Ready.UEFI = [bool](Get-Disk | Where-Object { $_.IsSystem -and $_.PartitionStyle -eq "GPT" })}
