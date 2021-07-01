@@ -29,6 +29,7 @@
     Make more end-user friendly. Integrate into PSADT for example to provide popups
 
     Version History:
+    1.0.4: Fixed parsing issue with CPU evaluation
     1.0.3: Added CPU, RAM and storage checks
     1.0.2: Added Secure Boot certificate checks
     1.0.1: Fixed ability to gather Lenovo BIOS version
@@ -805,7 +806,7 @@ Microsoft SQ2
         Catch { $Ready.StorageGB = 0 }
     # CPU
         $Ready.CPUName = (Get-WmiObject win32_processor).Name
-        $ProcessedCPUs = foreach ($Processor in $SupportedCPUs.Split("`r`n")) {
+        $ProcessedCPUs = foreach ($Processor in $SupportedCPUs.Split("`n").Trim()) {
             $Ready.CPUName.Contains($Processor)
         }
         $Ready.CPUSupported = $true -in $ProcessedCPUs
